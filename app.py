@@ -3,6 +3,8 @@ import pandas as pd
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+from PIL import Image
 # from pandas_profiling import ProfileReport
 # from streamlit_pandas_profiling import st_profile_report
 from multipage import MultiPage
@@ -10,6 +12,9 @@ from pages import question1,question2,question3,question4
 
 # Create an instance of the app 
 app = MultiPage()
+st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon='🌕')
+mmu = Image.open('./mmu_logo.png')
+st.image(mmu, width=300)
 
 # Import Cases and Testing Dataset
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
@@ -20,17 +25,16 @@ states_tests_dir = "epidemic/tests_state.csv"
 pkrc_dir = "epidemic/pkrc.csv"
 checkIn_dir = "mysejahtera/checkin_state.csv"
 
-#st.set_page_config()
-st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon=':moon_cake:')
-
 # Sidebar
 # with st.sidebar.header('1. Upload your CSV data'):
 #     # Upload File
 #     uploaded_file = st.sidebar.file_uploader(
 #         "Upload your input CSV file", type=["csv"])
 #st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=64 height=64>](https://streamlit.io/)'''.format(img_to_bytes("static/mooncake4.png")), unsafe_allow_html=True)
-st.sidebar.header('TT3V - Mooncake')
 
+mooncake = Image.open('./mooncake_logo.png')
+st.sidebar.image(mooncake, width=64)
+st.sidebar.header('TT3V - Mooncake')
 st.sidebar.markdown('''
     Koh Han Yi (1181302907)  
     Lee Min Xuan (1181302793)  

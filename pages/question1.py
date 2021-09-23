@@ -4,6 +4,7 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 import missingno as msno
+
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
 state_case_dir = "epidemic/cases_state.csv"
 clusters_dir = "epidemic/clusters.csv"
@@ -11,17 +12,18 @@ malaysia_tests_dir = "epidemic/tests_malaysia.csv"
 states_tests_dir = "epidemic/tests_state.csv"
 pkrc_dir = "epidemic/pkrc.csv"
 checkIn_dir = "mysejahtera/checkin_state.csv"
+hospital_dir = "epidemic/hospital.csv"
 
 def app():
     st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
     chosen = st.radio(
     'Choose a Dataset',
-    ["Malaysia Cases", "States Cases", "Clusters", "Malaysia Tests","States Tests","PKRC","CheckIn"])
+    ["Malaysia Cases", "State Cases", "Clusters", "Malaysia Tests","State Tests","PKRC","State CheckIn","Hospital"])
     st.write(f"You chosen {chosen} dataset!")
     start_date = "2021-07-01"
     end_date = "2021-08-31"
 
-    if chosen == "States Cases":
+    if chosen == "State Cases":
         state_case_df = pd.read_csv(state_case_dir)
         after_start_date = state_case_df["date"] >= start_date
         before_end_date = state_case_df["date"] <= end_date
@@ -89,7 +91,7 @@ def app():
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
 
-    elif chosen == "States Tests":
+    elif chosen == "State Tests":
         states_tests_df = pd.read_csv(states_tests_dir)
         after_start_date = states_tests_df["date"] >= start_date
         before_end_date = states_tests_df["date"] <= end_date
@@ -280,6 +282,58 @@ def app():
         axes[1].set_title('unique_ind')
         sns.boxplot(data=checkIn_df, x = checkIn_df["unique_loc"],ax=axes[2])
         axes[1].set_title('unique_loc')
+
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
+    elif chosen == "Hospital":
+        hospital_df = pd.read_csv(hospital_dir)
+        after_start_date = hospital_df["date"] >= start_date
+        before_end_date = hospital_df["date"] <= end_date
+        between_two_dates = after_start_date & before_end_date
+        hospital_df = hospital_df.loc[between_two_dates]
+        hospital_df.head()
+
+        st.write('First 5 rows of the dataset')
+        st.table(hospital_df.head())
+
+        st.write('Statistical Overview')
+        st.table(hospital_df.describe())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':hospital_df.isna().sum().index, 'Count of Null Values':hospital_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(hospital_df)
+        col2.pyplot()
+
+        st.write('Outliers detection with Boxplot')
+        fig, axes = plt.subplots(4, 3, figsize=(15, 5), sharey=True)
+        plt.subplots_adjust(left=None, bottom= 0.1, right=None, top=2, wspace=0.2, hspace=0.6)
+        sns.boxplot(data=hospital_df, x = hospital_df["beds"],ax=axes[0][0])
+        axes[0][0].set_title('beds')
+        sns.boxplot(data=hospital_df,x = hospital_df["beds_covid"],ax=axes[0][1])
+        axes[0][1].set_title('beds_covid')
+        sns.boxplot(data=hospital_df, x = hospital_df["beds_noncrit"],ax=axes[0][2])
+        axes[0][2].set_title('beds_noncrit')
+        sns.boxplot(data=hospital_df, x = hospital_df["admitted_pui"],ax=axes[1][0])
+        axes[1][0].set_title('admitted_pui')
+        sns.boxplot(data=hospital_df,x = hospital_df["admitted_covid"],ax=axes[1][1])
+        axes[1][1].set_title('admitted_covid')
+        sns.boxplot(data=hospital_df, x = hospital_df["admitted_total"],ax=axes[1][2])
+        axes[1][2].set_title('admitted_total')
+        sns.boxplot(data=hospital_df, x = hospital_df["discharged_pui"],ax=axes[2][0])
+        axes[2][0].set_title('discharged_pui')
+        sns.boxplot(data=hospital_df,x = hospital_df["discharged_covid"],ax=axes[2][1])
+        axes[2][1].set_title('discharged_covid')
+        sns.boxplot(data=hospital_df, x = hospital_df["discharged_total"],ax=axes[2][2])
+        axes[2][2].set_title('discharged_total')
+        sns.boxplot(data=hospital_df, x = hospital_df["hosp_covid"],ax=axes[3][0])
+        axes[3][0].set_title('hosp_covid')
+        sns.boxplot(data=hospital_df,x = hospital_df["hosp_pui"],ax=axes[3][1])
+        axes[3][1].set_title('hosp_pui')
+        sns.boxplot(data=hospital_df, x = hospital_df["hosp_noncovid"],ax=axes[3][2])
+        axes[3][2].set_title('hosp_noncovid')
 
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()

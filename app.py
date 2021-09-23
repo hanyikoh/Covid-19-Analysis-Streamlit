@@ -21,7 +21,7 @@ pkrc_dir = "epidemic/pkrc.csv"
 checkIn_dir = "mysejahtera/checkin_state.csv"
 
 #st.set_page_config()
-st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon=':moon_cake:')
+st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon='🌕')
 
 # Sidebar
 # with st.sidebar.header('1. Upload your CSV data'):

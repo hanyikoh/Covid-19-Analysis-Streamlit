@@ -50,8 +50,8 @@ st.sidebar.markdown('3. Strong features/indicators to daily cases for Pahang, Ke
 st.sidebar.markdown('4. Models (regression/classification) that performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor.')
 
 st.sidebar.markdown('__Datasets Used__')
-st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Deaths')
-st.sidebar.markdown('Filenames: ')
+st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Mobility and Contact Tracing')
+st.sidebar.markdown('Filenames: cases_state.csv, clusters.csv, hospital.csv, pkrc.csv, checkin_state.csv')
 
 st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
 st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')

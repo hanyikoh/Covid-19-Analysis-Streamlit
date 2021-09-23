@@ -4,7 +4,7 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pandas_profiling import ProfileReport
-
+import missingno as msno
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
 state_case_dir = "epidemic/cases_state.csv"
 clusters_dir = "epidemic/clusters.csv"
@@ -30,6 +30,14 @@ def app():
         state_case_df = state_case_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(state_case_df.head())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':state_case_df.isna().sum().index, 'Count of Null Values':state_case_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(state_case_df)
+        col2.pyplot()
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -81,8 +89,17 @@ def app():
         before_end_date = states_tests_df["date"] <= end_date
         between_two_dates = after_start_date & before_end_date
         states_tests_df = states_tests_df.loc[between_two_dates]
+        
         st.write('First 5 rows of the dataset')
         st.table(states_tests_df.head())
+        
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':states_tests_df.isna().sum().index, 'Count of Null Values':states_tests_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(states_tests_df)
+        col2.pyplot()
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -104,6 +121,14 @@ def app():
         malaysia_case_df = malaysia_case_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(malaysia_case_df.head())
+        
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':malaysia_case_df.isna().sum().index, 'Count of Null Values':malaysia_case_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(malaysia_case_df)
+        col2.pyplot()
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(4, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -140,6 +165,14 @@ def app():
         pkrc_df = pkrc_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(pkrc_df.head())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':pkrc_df.isna().sum().index, 'Count of Null Values':pkrc_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(pkrc_df)
+        col2.pyplot()
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(4, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -178,6 +211,14 @@ def app():
         checkIn_df.head()
         st.write('First 5 rows of the dataset')
         st.table(checkIn_df.head())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':checkIn_df.isna().sum().index, 'Count of Null Values':checkIn_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(checkIn_df)
+        col2.pyplot()
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -201,6 +242,15 @@ def app():
         pkrc_df = pkrc_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(pkrc_df.head())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':pkrc_df.isna().sum().index, 'Count of Null Values':pkrc_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(pkrc_df)
+        col2.pyplot()
+
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(4, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')

@@ -27,6 +27,9 @@ def app():
     state_case_new_df = state_case_new_df.groupby([state_case_new_df['date']]).sum()
     state_case_recovered_df = state_case_recovered_df.groupby([state_case_recovered_df['date']]).sum()
 
+    state_case_import_df.columns = state_case_import_df.columns.str[1:]
+    state_case_new_df.columns = state_case_new_df.columns.str[1:]
+    state_case_recovered_df.columns = state_case_recovered_df.columns.str[1:]
     if selected_correlation == "New Cases":
         st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Pahang: Kedah (0.94)')     
         st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Johor: Perak and Pulau Pinang (0.93)')     

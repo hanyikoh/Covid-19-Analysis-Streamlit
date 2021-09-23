@@ -29,7 +29,11 @@ rslt_df_ph = df_final[df_final['state'] == "Pahang"]
 rslt_df_kd = df_final[df_final['state'] == "Kedah"]
 rslt_df_jh = df_final[df_final['state'] == "Johor"]
 rslt_df_sl = df_final[df_final['state'] == "Selangor"]
+<<<<<<< Updated upstream
 rf = RandomForestClassifier(n_jobs=-1, class_weight="balanced",criterion = "entropy")
+=======
+rf = RandomForestClassifier(n_jobs=-1, class_weight="balanced_subsample",max_depth=5)
+>>>>>>> Stashed changes
 feat_selector = BorutaPy(rf, n_estimators="auto", random_state=1)
 
 def ranking(ranks, names, order=1):
@@ -39,12 +43,19 @@ def ranking(ranks, names, order=1):
     return dict(zip(names, ranks))
 
 def app():
+<<<<<<< Updated upstream
     
     st.markdown("### " +"The strong features to daily new Covid-19 cases...")
     st.markdown("#### We have used two different methods, which are Boruta and Recursive Feature Elimination (RFE) to select the most useful feature. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
             + "By applying in different state, we might get different rank of the features.")
     st.markdown("##### Choose state(s) that you want to view ^ o ^")
     selected_metrics = st.selectbox(label = "State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+=======
+    st.markdown("#### " +"The strong features to daily new Covid-19 cases...")
+    selected_metrics = st.selectbox(
+        label="Please Choose states", options=['Pahang','Johor','Kedah','Selangor','All 4 states']
+    )
+>>>>>>> Stashed changes
     
     if selected_metrics == "Pahang":
         df = rslt_df_ph
@@ -73,11 +84,16 @@ def app():
     rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
     rfe_score = pd.DataFrame(list(rfe_score.items()), columns=['Features', 'Score'])
     rfe_score = rfe_score.sort_values("Score", ascending = False)
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     chosen = st.radio('Choose a feature selection method',["Boruta feature selection", "RFE Feature Selection"])
     
     st.markdown("#### " +"Features ranking using " + chosen + " method in " + selected_metrics)
     if chosen == "Boruta feature selection":
+<<<<<<< Updated upstream
         top15 = boruta_score.head(15).reset_index(drop=True)
         sns.catplot(x="Score", y="Features", data = boruta_score[0:35], kind = "bar", 
                height=14, aspect=1.1, palette='RdYlBu')
@@ -88,6 +104,17 @@ def app():
         top15 = rfe_score.head(15).reset_index(drop=True)
         sns.catplot(x="Score", y="Features", data = rfe_score[0:35], kind = "bar", 
                height=14, aspect=1.1, palette='Spectral')
+=======
+        top15 = boruta_score.head(15)
+        sns.catplot(x="Score", y="Features", data = boruta_score[0:35], kind = "bar", 
+               height=14, aspect=1.9, palette='RdYlBu')
+        plt.title("Boruta Features Ranking")
+        st.pyplot()
+    elif chosen == "RFE Feature Selection":
+        top15 = rfe_score.head(15)
+        sns.catplot(x="Score", y="Features", data = rfe_score[0:35], kind = "bar", 
+               height=14, aspect=2.9, palette='Spectral')
+>>>>>>> Stashed changes
         plt.title("RFE Features Ranking")
         st.pyplot()
     st.markdown("#### " +"Top 15 features using " + chosen + " method in " + selected_metrics)

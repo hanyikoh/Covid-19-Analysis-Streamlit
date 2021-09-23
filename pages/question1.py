@@ -29,7 +29,10 @@ def app():
         state_case_df = state_case_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(state_case_df.head())
-
+        
+        st.write('Statistical Overview')
+        st.table(state_case_df.describe())
+        
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':state_case_df.isna().sum().index, 'Count of Null Values':state_case_df.isna().sum().values})  
@@ -60,6 +63,10 @@ def app():
         clusters_df['date'] = clusters_df.date_announced
         st.write('First 5 rows of the dataset')
         st.table(clusters_df.head())
+
+        st.write('Statistical Overview')
+        st.table(clusters_df.describe())
+
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(3, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
@@ -91,7 +98,10 @@ def app():
         
         st.write('First 5 rows of the dataset')
         st.table(states_tests_df.head())
-        
+
+        st.write('Statistical Overview')
+        st.table(states_tests_df.describe())
+
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':states_tests_df.isna().sum().index, 'Count of Null Values':states_tests_df.isna().sum().values})  
@@ -120,7 +130,10 @@ def app():
         malaysia_case_df = malaysia_case_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(malaysia_case_df.head())
-        
+
+        st.write('Statistical Overview')
+        st.table(malaysia_case_df.describe())
+
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':malaysia_case_df.isna().sum().index, 'Count of Null Values':malaysia_case_df.isna().sum().values})  
@@ -156,6 +169,38 @@ def app():
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
 
+    elif chosen == "Malaysia Tests":
+        malaysia_tests_df = pd.read_csv(malaysia_tests_dir)
+        after_start_date = malaysia_tests_df["date"] >= start_date
+        before_end_date = malaysia_tests_df["date"] <= end_date
+        between_two_dates = after_start_date & before_end_date
+        malaysia_tests_df = malaysia_tests_df.loc[between_two_dates]
+        st.write('First 5 rows of the dataset')
+        st.table(malaysia_tests_df.head())
+
+        st.write('Statistical Overview')
+        st.table(malaysia_tests_df.describe())
+
+        st.write("Missing Values Detection")
+        col1, col2 = st.columns(2)
+        null_df=pd.DataFrame({'Column':malaysia_tests_df.isna().sum().index, 'Count of Null Values':malaysia_tests_df.isna().sum().values})  
+        col1.table(null_df.head())
+        msno.bar(malaysia_tests_df)
+        col2.pyplot()
+
+        st.write('Outliers detection with Boxplot')
+        fig, axes = plt.subplots(1, 2, figsize=(15, 5), sharey=True)
+        # fig.suptitle('Outliers Visualization')
+        plt.subplots_adjust(left=None, bottom= 0.1, right=None, top=0.5, wspace=0.2, hspace=0.6)
+
+        sns.boxplot(data=malaysia_tests_df, x = malaysia_tests_df["rtk-ag"],ax=axes[0])
+        axes[0].set_title('rtk-ag')
+
+        sns.boxplot(data=malaysia_tests_df,x = malaysia_tests_df["pcr"],ax=axes[1])
+        axes[1].set_title('pcr')
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        st.pyplot()
+
     elif chosen == "PKRC":
         pkrc_df = pd.read_csv(pkrc_dir)
         after_start_date = pkrc_df["date"] >= start_date
@@ -164,6 +209,9 @@ def app():
         pkrc_df = pkrc_df.loc[between_two_dates]
         st.write('First 5 rows of the dataset')
         st.table(pkrc_df.head())
+
+        st.write('Statistical Overview')
+        st.table(pkrc_df.describe())
 
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
@@ -211,6 +259,9 @@ def app():
         st.write('First 5 rows of the dataset')
         st.table(checkIn_df.head())
 
+        st.write('Statistical Overview')
+        st.table(checkIn_df.describe())
+
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':checkIn_df.isna().sum().index, 'Count of Null Values':checkIn_df.isna().sum().values})  
@@ -230,50 +281,5 @@ def app():
         sns.boxplot(data=checkIn_df, x = checkIn_df["unique_loc"],ax=axes[2])
         axes[1].set_title('unique_loc')
 
-        st.set_option('deprecation.showPyplotGlobalUse', False)
-        st.pyplot()
-
-    elif chosen == "PKRC":
-        pkrc_df = pd.read_csv(pkrc_dir)
-        after_start_date = pkrc_df["date"] >= start_date
-        before_end_date = pkrc_df["date"] <= end_date
-        between_two_dates = after_start_date & before_end_date
-        pkrc_df = pkrc_df.loc[between_two_dates]
-        st.write('First 5 rows of the dataset')
-        st.table(pkrc_df.head())
-
-        st.write("Missing Values Detection")
-        col1, col2 = st.columns(2)
-        null_df=pd.DataFrame({'Column':pkrc_df.isna().sum().index, 'Count of Null Values':pkrc_df.isna().sum().values})  
-        col1.table(null_df.head())
-        msno.bar(pkrc_df)
-        col2.pyplot()
-
-
-        st.write('Outliers detection with Boxplot')
-        fig, axes = plt.subplots(4, 3, figsize=(15, 5), sharey=True)
-        # fig.suptitle('Outliers Visualization')
-        plt.subplots_adjust(left=None, bottom= 0.1, right=None, top=2, wspace=0.2, hspace=0.6)
-
-        sns.boxplot(data=pkrc_df, x = pkrc_df["beds"],ax=axes[0][0])
-        axes[0][0].set_title('beds')
-        sns.boxplot(data=pkrc_df,x = pkrc_df["admitted_pui"],ax=axes[0][1])
-        axes[0][1].set_title('admitted_pui')
-        sns.boxplot(data=pkrc_df, x = pkrc_df["admitted_covid"],ax=axes[0][2])
-        axes[0][2].set_title("admitted_covid")
-        sns.boxplot(data=pkrc_df,x = pkrc_df["admitted_total"],ax=axes[1][0])
-        axes[1][0].set_title('admitted_total')
-        sns.boxplot(data=pkrc_df, x = pkrc_df["discharge_pui"],ax=axes[1][1])
-        axes[1][1].set_title('discharge_pui')
-        sns.boxplot(data=pkrc_df,x = pkrc_df["discharge_covid"],ax=axes[1][2])
-        axes[1][2].set_title('discharge_covid')
-        sns.boxplot(data=pkrc_df, x = pkrc_df["discharge_total"],ax=axes[2][0])
-        axes[2][0].set_title('discharge_total')
-        sns.boxplot(data=pkrc_df,x = pkrc_df["pkrc_covid"],ax=axes[2][1])
-        axes[2][1].set_title('pkrc_covid')
-        sns.boxplot(data=pkrc_df, x = pkrc_df["pkrc_pui"],ax=axes[2][2])
-        axes[2][2].set_title('pkrc_pui')
-        sns.boxplot(data=pkrc_df,x = pkrc_df["pkrc_noncovid"],ax=axes[3][0])
-        axes[2][0].set_title('pkrc_noncovid')
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()

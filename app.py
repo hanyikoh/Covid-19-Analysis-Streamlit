@@ -31,7 +31,9 @@ st.set_page_config(layout='wide')
 st.sidebar.header('TT3V - Mooncake')
 
 st.sidebar.markdown('''
-    Koh Han Yi (1181302907), Lee Min Xuan (1181302793), Tan Jia Qi (1191301879)
+    Koh Han Yi (1181302907)  
+    Lee Min Xuan (1181302793)  
+    Tan Jia Qi (1191301879)
     '''
 )
 

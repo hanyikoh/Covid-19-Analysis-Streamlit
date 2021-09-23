@@ -31,7 +31,7 @@ def confusion_report(y_test, y_pred):
     print('Majority FN= ', confusion_majority[1][0])
     print('Majority TP= ', confusion_majority[1][1])
     print('**********************')
-    
+
     precision = precision_score(y_test, y_pred, pos_label="High")
     recall = recall_score(y_test, y_pred, pos_label="High")
     f1 = f1_score(y_test, y_pred, pos_label="High")

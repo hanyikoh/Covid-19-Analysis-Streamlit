@@ -20,14 +20,15 @@ states_tests_dir = "epidemic/tests_state.csv"
 pkrc_dir = "epidemic/pkrc.csv"
 checkIn_dir = "mysejahtera/checkin_state.csv"
 
-st.set_page_config(layout='wide')
+#st.set_page_config()
+st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon=':moon_cake:')
 
 # Sidebar
 # with st.sidebar.header('1. Upload your CSV data'):
 #     # Upload File
 #     uploaded_file = st.sidebar.file_uploader(
 #         "Upload your input CSV file", type=["csv"])
-# st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=64 height=64>](https://streamlit.io/)'''.format(img_to_bytes("static/mooncake1.png")), unsafe_allow_html=True)
+#st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=64 height=64>](https://streamlit.io/)'''.format(img_to_bytes("static/mooncake4.png")), unsafe_allow_html=True)
 st.sidebar.header('TT3V - Mooncake')
 
 st.sidebar.markdown('''
@@ -56,7 +57,7 @@ st.sidebar.markdown('Filenames: cases_state.csv, clusters.csv, hospital.csv, pkr
 st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
 st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
 
-# st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://github.com/daniellewisDL/streamlit-cheat-sheet) <small>TDS 3301 Data Mining | Group Assignment </small>'''.format(img_to_bytes("static/mmu_logo.png")), unsafe_allow_html=True)
+#st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://github.com/daniellewisDL/streamlit-cheat-sheet) <small>TDS 3301 Data Mining | Group Assignment </small>'''.format(img_to_bytes("static/mmu_logo.png")), unsafe_allow_html=True)
 
 # Web App Title
 st.title("TDS 3301 Data Mining - Group Assignment")

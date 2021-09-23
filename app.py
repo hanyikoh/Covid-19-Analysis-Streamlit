@@ -12,11 +12,38 @@ st.markdown('''
 ---
 ''')
 # Sidebar
-with st.sidebar.header('1. Upload your CSV data'):
-    # Upload File
-    uploaded_file = st.sidebar.file_uploader(
-        "Upload your input CSV file", type=["csv"])
+# with st.sidebar.header('1. Upload your CSV data'):
+#     # Upload File
+#     uploaded_file = st.sidebar.file_uploader(
+#         "Upload your input CSV file", type=["csv"])
+# st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=64 height=64>](https://streamlit.io/)'''.format(img_to_bytes("static/mooncake1.png")), unsafe_allow_html=True)
+st.sidebar.header('TT3V - Mooncake')
 
+st.sidebar.markdown('''
+    Koh Han Yi (1181302907), Lee Min Xuan (1181302793), Tan Jia Qi (1191301879)
+    '''
+)
+
+question_num = st.sidebar.selectbox(
+    'Select Question:',
+('Question 1', 'Question 2', 'Question 3', 'Question 4')
+)
+
+st.sidebar.markdown('__Questions__')
+
+st.sidebar.markdown('1. Exploratory data analysis steps conducted.')
+st.sidebar.markdown('2. States that exhibit strong correlation with Pahang and Johor.')
+st.sidebar.markdown('3. Strong features/indicators to daily cases for Pahang, Kedah, Johor, and Selangor.')
+st.sidebar.markdown('4. Models (regression/classification) that performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor.')
+
+st.sidebar.markdown('__Datasets Used__')
+st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Deaths')
+st.sidebar.markdown('Filenames: ')
+
+st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
+st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
+
+# st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://github.com/daniellewisDL/streamlit-cheat-sheet) <small>TDS 3301 Data Mining | Group Assignment </small>'''.format(img_to_bytes("static/mmu_logo.png")), unsafe_allow_html=True)
 
 # Import Cases and Testing Dataset
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
@@ -171,33 +198,51 @@ elif chosen == "Malaysia Tests":
 # st_profile_report(pr)
 
 # Pandas Profiling Report
-if uploaded_file is not None:
+
+st.info('Awaiting for CSV file to be uploaded.')
+if st.button('Press to use Example Dataset'):
+    # Example data
     @st.cache
-    def load_csv():
-        csv = pd.read_csv(uploaded_file)
-        return csv
-    df = load_csv()
+    def load_data():
+        a = pd.DataFrame(
+            np.random.rand(100, 5),
+            columns=['a', 'b', 'c', 'd', 'e']
+        )
+        return a
+    df = load_data()
     pr = ProfileReport(df, explorative=True)
     st.header('**Input DataFrame**')
     st.write(df)
     st.write('---')
     st.header('**Pandas Profiling Report**')
     st_profile_report(pr)
-else:
-    st.info('Awaiting for CSV file to be uploaded.')
-    if st.button('Press to use Example Dataset'):
-        # Example data
-        @st.cache
-        def load_data():
-            a = pd.DataFrame(
-                np.random.rand(100, 5),
-                columns=['a', 'b', 'c', 'd', 'e']
-            )
-            return a
-        df = load_data()
-        pr = ProfileReport(df, explorative=True)
-        st.header('**Input DataFrame**')
-        st.write(df)
-        st.write('---')
-        st.header('**Pandas Profiling Report**')
-        st_profile_report(pr)
+# if uploaded_file is not None:
+#     @st.cache
+#     def load_csv():
+#         csv = pd.read_csv(uploaded_file)
+#         return csv
+#     df = load_csv()
+#     pr = ProfileReport(df, explorative=True)
+#     st.header('**Input DataFrame**')
+#     st.write(df)
+#     st.write('---')
+#     st.header('**Pandas Profiling Report**')
+#     st_profile_report(pr)
+# else:
+    # st.info('Awaiting for CSV file to be uploaded.')
+    # if st.button('Press to use Example Dataset'):
+    #     # Example data
+    #     @st.cache
+    #     def load_data():
+    #         a = pd.DataFrame(
+    #             np.random.rand(100, 5),
+    #             columns=['a', 'b', 'c', 'd', 'e']
+    #         )
+    #         return a
+    #     df = load_data()
+    #     pr = ProfileReport(df, explorative=True)
+    #     st.header('**Input DataFrame**')
+    #     st.write(df)
+    #     st.write('---')
+    #     st.header('**Pandas Profiling Report**')
+    #     st_profile_report(pr)

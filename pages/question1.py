@@ -3,7 +3,6 @@ import pandas as pd
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-from pandas_profiling import ProfileReport
 import missingno as msno
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
 state_case_dir = "epidemic/cases_state.csv"

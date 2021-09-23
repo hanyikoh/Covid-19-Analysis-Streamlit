@@ -3,8 +3,8 @@ import pandas as pd
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-from pandas_profiling import ProfileReport
-from streamlit_pandas_profiling import st_profile_report
+# from pandas_profiling import ProfileReport
+# from streamlit_pandas_profiling import st_profile_report
 from multipage import MultiPage
 from pages import question1,question2,question3,question4
 

@@ -65,11 +65,16 @@ def app():
     boruta_score = pd.DataFrame(list(boruta_score.items()), columns=['Features', 'Score']) 
     boruta_score = boruta_score.sort_values("Score",ascending = False)
     
-    
-    #rf=RandomForestClassifier(n_jobs=-1, class_weight="balanced", max_depth = 5, n_estimators = 100)
+    rf = RandomForestClassifier(n_jobs=-1, class_weight="balanced",criterion = "entropy")
     rf.fit(X,y)
     rfe = RFECV(rf, min_features_to_select = 1, cv =2)
+    if selected_metrics == "Selangor":
+        from sklearn.feature_selection import RFE
+        from sklearn.linear_model import LogisticRegression
+        model = LogisticRegression(solver='lbfgs')
+        rfe = RFE(model, 3)
     rfe.fit(X,y)
+    rf = RandomForestClassifier(n_jobs=-1, class_weight="balanced",criterion = "entropy")
     rfe_score = ranking(list(map(float, rfe.ranking_)), colnames, order=-1)
     rfe_score = pd.DataFrame(list(rfe_score.items()), columns=['Features', 'Score'])
     rfe_score = rfe_score.sort_values("Score", ascending = False)

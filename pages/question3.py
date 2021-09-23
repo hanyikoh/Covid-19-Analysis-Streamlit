@@ -40,11 +40,11 @@ def ranking(ranks, names, order=1):
 
 def app():
     
-    st.markdown("### " +"The strong features to daily new Covid-19 cases...")
-    st.markdown("#### We have used two different methods, which are Boruta and Recursive Feature Elimination (RFE) to select the most useful feature. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
+    st.markdown("### " +"The strong features to predict daily new Covid-19 cases")
+    st.write("We have used two different methods, which are Boruta and Recursive Feature Elimination (RFE) to select the most useful feature. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
             + "By applying in different state, we might get different rank of the features.")
-    st.markdown("##### Choose state(s) that you want to view ^ o ^")
-    selected_metrics = st.selectbox(label = "State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+    
+    selected_metrics = st.selectbox(label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
     
     if selected_metrics == "Pahang":
         df = rslt_df_ph

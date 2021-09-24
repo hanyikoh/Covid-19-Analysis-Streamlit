@@ -16,6 +16,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve
 
 df_final = pd.read_csv("data.csv")
+df_final = df_final[['Unnamed: 0', 'Unnamed: 1','hosp_covid_hospital','rtk-ag','cases_recovered','pcr','Checkins number','cases_new']]
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]
 rslt_df_kd = df_final[df_final['state'] == "Kedah"]
@@ -68,7 +69,33 @@ def showMSE(y_test,y_pred):
     evaluation_scores.append(mean_absolute_error(y_test, y_pred))
     st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
 
-def read_choice(state_choice):
+def classify(X,y):
+        st.markdown("> ## Decision Tree Classifier")
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
+        clf = DecisionTreeClassifier(criterion="gini", max_depth=3, splitter='random') #pruning the tree by setting the depth
+        clf = clf.fit(X_train,y_train)# Train Decision Tree Classifer*
+        y_pred = clf.predict(X_test)#Predict the response for test dataset*
+        #print(clf)
+        confusion_report(y_test,y_pred)
+        st.markdown("> ## Gaussian Naive Bayes Classifier")
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
+        model = GaussianNB()
+        model = model.fit(X_train,y_train)
+        y_pred = model.predict(X_test)
+        #print(model)
+        confusion_report(y_test,y_pred)
+
+        
+def app():
+    #st.write("To be added")
+    #confusion_report(['High','medium'],['High','medium'])
+    st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
+    state_choice = st.selectbox( label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+    model_choice = st.selectbox( label = "Choose regressor or classifier :", options=['Regressor','Classifier'] )
+    features = {'Features used': ['hosp_covid_hospital','rtk-ag','cases_recovered','pcr','Checkins number','cases_new']}
+    
+    st.table(pd.DataFrame(features))
+    
     if state_choice == "Pahang":
         df = rslt_df_ph
     elif state_choice == "Kedah":
@@ -80,11 +107,13 @@ def read_choice(state_choice):
     elif state_choice == "All 4 states" :
         df = df_final
     
-        
-def app():
-    #st.write("To be added")
-    #confusion_report(['High','medium'],['High','medium'])
-    st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
-    state_choice = st.selectbox( label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
-    model_choice = st.selectbox( label = "Choose regressor or classifier :", options=['Regressor','Classifier'] )
-    read_choice(state_choice)
+    
+    if model_choice == "Regressor":
+        df
+    if model_choice == "Classifier":
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
+        y = df.cases_new_category 
+        classify(X,y)
+
+

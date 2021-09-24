@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import OneHotEncoder
 
-state_case_dir = "epidemic/cases_state.csv"
+state_case_dir = "dataset/cases_state.csv"
 
 def app():
     st.markdown('> What are the states that exhibit strong correlation with Pahang and Johor?')

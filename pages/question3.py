@@ -21,7 +21,7 @@ from tqdm import tqdm_notebook, tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
-df_final = pd.read_csv("./dataset/cleaned_data.csv")
+df_final = pd.read_csv("dataset/cleaned_data.csv")
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]
 rslt_df_kd = df_final[df_final['state'] == "Kedah"]

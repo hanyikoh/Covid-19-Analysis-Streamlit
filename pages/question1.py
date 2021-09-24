@@ -5,14 +5,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import missingno as msno
 
-malaysia_case_dir = "epidemic/cases_malaysia.csv"
-state_case_dir = "epidemic/cases_state.csv"
-clusters_dir = "epidemic/clusters.csv"
-malaysia_tests_dir = "epidemic/tests_malaysia.csv"
-states_tests_dir = "epidemic/tests_state.csv"
-pkrc_dir = "epidemic/pkrc.csv"
-checkIn_dir = "mysejahtera/checkin_state.csv"
-hospital_dir = "epidemic/hospital.csv"
+malaysia_case_dir = "dataset/cases_malaysia.csv"
+state_case_dir = "dataset/cases_state.csv"
+clusters_dir = "dataset/clusters.csv"
+malaysia_tests_dir = "dataset/tests_malaysia.csv"
+states_tests_dir = "dataset/tests_state.csv"
+pkrc_dir = "dataset/pkrc.csv"
+checkIn_dir = "dataset/checkin_state.csv"
+hospital_dir = "dataset/hospital.csv"
 
 def app():
     st.markdown('> Discuss the exploratory data analysis steps you have conducted including detection of outliers and missing values?')

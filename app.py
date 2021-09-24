@@ -15,13 +15,13 @@ app = MultiPage()
 st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon='🌕')
 
 # Import Cases and Testing Dataset
-malaysia_case_dir = "epidemic/cases_malaysia.csv"
-state_case_dir = "epidemic/cases_state.csv"
-clusters_dir = "epidemic/clusters.csv"
-malaysia_tests_dir = "epidemic/tests_malaysia.csv"
-states_tests_dir = "epidemic/tests_state.csv"
-pkrc_dir = "epidemic/pkrc.csv"
-checkIn_dir = "mysejahtera/checkin_state.csv"
+malaysia_case_dir = "dataset/cases_malaysia.csv"
+state_case_dir = "dataset/cases_state.csv"
+clusters_dir = "dataset/clusters.csv"
+malaysia_tests_dir = "dataset/tests_malaysia.csv"
+states_tests_dir = "dataset/tests_state.csv"
+pkrc_dir = "dataset/pkrc.csv"
+checkIn_dir = "dataset/checkin_state.csv"
 
 # Sidebar
 mooncake = Image.open('./mooncake_logo.png')

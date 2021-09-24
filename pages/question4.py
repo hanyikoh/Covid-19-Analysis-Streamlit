@@ -15,7 +15,7 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve
 
-df_final = pd.read_csv("./dataset/cleaned_data.csv")
+df_final = pd.read_csv("dataset/cleaned_data.csv")
 df_final = df_final[['Unnamed: 0', 'Unnamed: 1','hosp_covid_hospital','rtk-ag','cases_recovered','pcr','Checkins number','cases_new']]
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]

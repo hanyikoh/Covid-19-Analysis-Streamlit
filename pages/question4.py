@@ -50,5 +50,6 @@ def confusion_report(y_test, y_pred):
     st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
 
 def app():
+    st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
     st.write("To be added")
     confusion_report(['High','medium'],['High','medium'])

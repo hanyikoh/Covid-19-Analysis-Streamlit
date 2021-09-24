@@ -48,13 +48,6 @@ st.sidebar.markdown('iv. Models (regression/classification) that performs well i
 
 st.sidebar.markdown('__Datasets Used__')
 st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Mobility and Contact Tracing')
-st.sidebar.markdown('''<style>Filenames: {
-                        - cases_state.csv, 
-                        - clusters.csv, 
-                        - hospital.csv, 
-                        - pkrc.csv, 
-                        - checkin_state.csv}
-                    </style>''', unsafe_allow_html=True)
 
 st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
 st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
@@ -66,7 +59,7 @@ st.sidebar.markdown('''<small>TDS 3301 Data Mining | Group Assignment </small>''
 mmu = Image.open('./mmu_logo.png')
 st.image(mmu, width=300)
 st.title("TDS 3301 Data Mining - Group Assignment")
-st.markdown("> Question 3: COVID-19 in Malaysia")
+st.write("Question 3: COVID-19 in Malaysia")
 st.header(f"{question_num}")
 
 

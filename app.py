@@ -13,8 +13,6 @@ from pages import question1,question2,question3,question4
 # Create an instance of the app 
 app = MultiPage()
 st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon='🌕')
-mmu = Image.open('./mmu_logo.png')
-st.image(mmu, width=300)
 
 # Import Cases and Testing Dataset
 malaysia_case_dir = "epidemic/cases_malaysia.csv"
@@ -26,12 +24,6 @@ pkrc_dir = "epidemic/pkrc.csv"
 checkIn_dir = "mysejahtera/checkin_state.csv"
 
 # Sidebar
-# with st.sidebar.header('1. Upload your CSV data'):
-#     # Upload File
-#     uploaded_file = st.sidebar.file_uploader(
-#         "Upload your input CSV file", type=["csv"])
-#st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=64 height=64>](https://streamlit.io/)'''.format(img_to_bytes("static/mooncake4.png")), unsafe_allow_html=True)
-
 mooncake = Image.open('./mooncake_logo.png')
 st.sidebar.image(mooncake, width=64)
 st.sidebar.header('TT3V - Mooncake')
@@ -44,39 +36,48 @@ st.sidebar.markdown('''
 
 question_num = st.sidebar.selectbox(
     'Select Question:',
-('Question 1', 'Question 2', 'Question 3', 'Question 4')
+('Question (i)', 'Question (ii)', 'Question (iii)', 'Question (iv)')
 )
 
 st.sidebar.markdown('__Questions__')
 
-st.sidebar.markdown('1. Exploratory data analysis steps conducted.')
-st.sidebar.markdown('2. States that exhibit strong correlation with Pahang and Johor.')
-st.sidebar.markdown('3. Strong features/indicators to daily cases for Pahang, Kedah, Johor, and Selangor.')
-st.sidebar.markdown('4. Models (regression/classification) that performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor.')
+st.sidebar.markdown('i. Exploratory data analysis steps conducted.')
+st.sidebar.markdown('ii. States that exhibit strong correlation with Pahang and Johor.')
+st.sidebar.markdown('iii. Strong features/indicators to daily cases for Pahang, Kedah, Johor, and Selangor.')
+st.sidebar.markdown('iv. Models (regression/classification) that performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor.')
 
 st.sidebar.markdown('__Datasets Used__')
 st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Mobility and Contact Tracing')
-st.sidebar.markdown('Filenames: cases_state.csv, clusters.csv, hospital.csv, pkrc.csv, checkin_state.csv')
+st.sidebar.markdown('''<style>Filenames: {
+                        - cases_state.csv, 
+                        - clusters.csv, 
+                        - hospital.csv, 
+                        - pkrc.csv, 
+                        - checkin_state.csv}
+                    </style>''', unsafe_allow_html=True)
 
 st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
 st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
 
-#st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://github.com/daniellewisDL/streamlit-cheat-sheet) <small>TDS 3301 Data Mining | Group Assignment </small>'''.format(img_to_bytes("static/mmu_logo.png")), unsafe_allow_html=True)
+st.sidebar.markdown("""<style>.css-1aumxhk {padding: 10em;}</style>""", unsafe_allow_html=True)
+st.sidebar.markdown('''<small>TDS 3301 Data Mining | Group Assignment </small>''', unsafe_allow_html=True)
 
 # Web App Title
+mmu = Image.open('./mmu_logo.png')
+st.image(mmu, width=300)
 st.title("TDS 3301 Data Mining - Group Assignment")
-st.text("Question 3: COVID-19 in Malaysia")
-st.write(f"## Question ({question_num})")
+st.markdown("> Question 3: COVID-19 in Malaysia")
+st.header(f"{question_num}")
 
 
-if question_num == "Question 1":
+if question_num == "Question (i)":
     question1.app()
 
-elif question_num == "Question 2":
+elif question_num == "Question (ii)":
     question2.app()
 
-elif question_num == "Question 3":
+elif question_num == "Question (iii)":
     question3.app()
 
-elif question_num == "Question 4":
+elif question_num == "Question (iv)":
     question4.app()

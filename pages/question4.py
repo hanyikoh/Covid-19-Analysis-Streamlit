@@ -139,7 +139,6 @@ def app():
         X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
         y = df.cases_new_category 
         classify(X,y)
-        df.drop('cases_new_category',axis=1,inplace=True)
     else:
         df.drop('cases_new_category',axis=1,inplace=True)
         X = df.drop(['cases_new','date','state'], axis=1)  #predict newcases

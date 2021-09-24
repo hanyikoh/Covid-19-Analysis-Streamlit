@@ -4,10 +4,10 @@ import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-
+from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeClassifier 
 from sklearn.naive_bayes import GaussianNB
-
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
@@ -63,11 +63,17 @@ def showMSE(y_test,y_pred):
     evaluation_scores = []
     
     evaluation_methods.append('Median absolute error')
-    evaluation_methods.append('Mean absolute error')
+    evaluation_methods.append('Mean absolute error (MAE)')
+    evaluation_methods.append('Mean squared error (MSE)')
+    evaluation_methods.append('Root Mean squared error (RMSE)')
+    evaluation_methods.append('R squared (R2)')
     
     evaluation_scores.append(median_absolute_error(y_test, y_pred))
     evaluation_scores.append(mean_absolute_error(y_test, y_pred))
-    st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
+    evaluation_scores.append(mean_squared_error(y_test, y_pred))
+    evaluation_scores.append(np.sqrt(mean_squared_error(y_test,y_pred)))
+    evaluation_scores.append(r2_score(y_test,y_pred))
+    st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Error':evaluation_scores}).set_index('Evaluation Method'))
 
 def classify(X,y):
         st.markdown("> ## Decision Tree Classifier")
@@ -85,6 +91,23 @@ def classify(X,y):
         #print(model)
         confusion_report(y_test,y_pred)
 
+def regressor(X,y):
+    st.markdown("> ## Random Forest Regressor")
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
+    rfr = RandomForestRegressor()
+    rfr.fit(X, y)
+    y_pred = rfr.predict(X_test)
+    showMSE(y_test,y_pred)
+    
+    st.markdown("> ## Linear Regressor")
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
+    model = LinearRegression()
+    model.fit(X_train,y_train)
+    y_pred = model.predict(X_test)
+    showMSE(y_test,y_pred)
+    st.write("> #### Linear Regressor has similar accuracy with Lasso Regressor")
+    
+    
         
 def app():
     #st.write("To be added")
@@ -107,13 +130,16 @@ def app():
     elif state_choice == "All 4 states" :
         df = df_final
     
-    
-    if model_choice == "Regressor":
-        df
     if model_choice == "Classifier":
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
-        X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
-        y = df.cases_new_category 
+        df2 = df
+        df2['cases_new_category'] = (pd.cut(df2['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        X = df2.drop(['cases_new','date','state','cases_new_category'], axis=1)
+        y = df2.cases_new_category 
         classify(X,y)
+    else :
+        X = df.drop(['cases_new','date','state'], axis=1)  #predict newcases
+        y = df['cases_new']
+        regressor(X,y)    
+        
 
 

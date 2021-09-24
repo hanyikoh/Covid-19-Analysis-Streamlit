@@ -41,7 +41,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':state_case_df.isna().sum().index, 'Count of Null Values':state_case_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = state_case_df.isnull().sum() / len(state_case_df)
         missing_values = missing_values[missing_values > 0]
@@ -60,7 +60,7 @@ def app():
         st.write('Outliers detection with Boxplot')
         fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
         # fig.suptitle('Outliers Visualization')
-        plt.subplots_adjust(left=None, bottom= 0.1, right=None, top=1, wspace=0.2, hspace=0.6)
+        plt.subplots_adjust(left=None, bottom= 0.1, right=None, top=0.5, wspace=0.2, hspace=0.6)
 
         sns.boxplot(data=state_case_df,x=state_case_df["cases_import"],ax=axes[0])
         axes[0].set_title('Import Case')
@@ -89,7 +89,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':clusters_df.isna().sum().index, 'Count of Null Values':clusters_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = clusters_df.isnull().sum() / len(clusters_df)
         missing_values = missing_values[missing_values > 0]
@@ -145,7 +145,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':states_tests_df.isna().sum().index, 'Count of Null Values':states_tests_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = states_tests_df.isnull().sum() / len(states_tests_df)
         missing_values = missing_values[missing_values > 0]
@@ -191,7 +191,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':malaysia_case_df.isna().sum().index, 'Count of Null Values':malaysia_case_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = malaysia_case_df.isnull().sum() / len(malaysia_case_df)
         missing_values = missing_values[missing_values > 0]
@@ -254,7 +254,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':malaysia_tests_df.isna().sum().index, 'Count of Null Values':malaysia_tests_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = malaysia_tests_df.isnull().sum() / len(malaysia_tests_df)
         missing_values = missing_values[missing_values > 0]
@@ -301,7 +301,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':pkrc_df.isna().sum().index, 'Count of Null Values':pkrc_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = pkrc_df.isnull().sum() / len(pkrc_df)
         missing_values = missing_values[missing_values > 0]
@@ -364,7 +364,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':checkIn_df.isna().sum().index, 'Count of Null Values':checkIn_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = checkIn_df.isnull().sum() / len(checkIn_df)
         missing_values = missing_values[missing_values > 0]
@@ -412,7 +412,7 @@ def app():
         st.write("Missing Values Detection")
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':hospital_df.isna().sum().index, 'Count of Null Values':hospital_df.isna().sum().values})  
-        col1.table(null_df.head())
+        col1.table(null_df)
         
         missing_values = hospital_df.isnull().sum() / len(hospital_df)
         missing_values = missing_values[missing_values > 0]

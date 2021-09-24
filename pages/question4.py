@@ -64,7 +64,7 @@ def showMSE(y_test,y_pred):
     evaluation_methods.append('Median absolute error')
     evaluation_methods.append('Mean absolute error (MAE)')
     evaluation_methods.append('Mean squared error (MSE)')
-    evaluation_methods.append('Root Mean squared error (RMSE)')
+    evaluation_methods.append('Root mean square error (RMSE)')
     evaluation_methods.append('R squared (R2)')
     
     evaluation_scores.append(median_absolute_error(y_test, y_pred))

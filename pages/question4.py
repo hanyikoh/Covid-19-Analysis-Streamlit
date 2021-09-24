@@ -40,9 +40,9 @@ def confusion_report(y_test, y_pred):
     print('Majority TP= ', confusion_majority[1][1])
     print('**********************')
 
-    precision = precision_score(y_test, y_pred, pos_label="High")
-    recall = recall_score(y_test, y_pred, pos_label="High")
-    f1 = f1_score(y_test, y_pred, pos_label="High")
+    precision = precision_score(y_test, y_pred, average="weighted")
+    recall = recall_score(y_test, y_pred, average="weighted")
+    f1 = f1_score(y_test, y_pred, average="weighted")
     accuracy = accuracy_score(y_test, y_pred)
 
     evaluation_methods.append('Precision')
@@ -78,7 +78,7 @@ def showMSE(y_test,y_pred):
 def classify(X,y):
         st.markdown("> ## Decision Tree Classifier")
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
-        clf = DecisionTreeClassifier(criterion="gini", max_depth=3, splitter='random') #pruning the tree by setting the depth
+        clf = DecisionTreeClassifier(criterion="gini", max_depth=4, splitter='random') #pruning the tree by setting the depth
         clf = clf.fit(X_train,y_train)# Train Decision Tree Classifer*
         y_pred = clf.predict(X_test)#Predict the response for test dataset*
         #print(clf)
@@ -121,7 +121,7 @@ def app():
     #st.write("To be added")
     #confusion_report(['High','medium'],['High','medium'])
     st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
-    state_choice = st.selectbox( label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+    state_choice = st.selectbox( label = "Choose a State :", options=['Johor','Kedah','Pahang','Selangor','All 4 states'] )
     model_choice = st.selectbox( label = "Choose regressor or classifier :", options=['Regressor','Classifier'] )
     features = {'Features used': ['hosp_covid_hospital','rtk-ag','cases_recovered','pcr','Checkins number','cases_new']}
     
@@ -129,26 +129,24 @@ def app():
     
     if state_choice == "Pahang":
         df = rslt_df_ph
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Kedah":
         df = rslt_df_kd
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Johor" :  
         df = rslt_df_jh
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Selangor" :
         df = rslt_df_sl
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "All 4 states" :
         df = df_final
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
+        
+    print(df)
     
     if model_choice == "Classifier":
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
         X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
         y = df.cases_new_category 
         classify(X,y)
-    else:
         df.drop('cases_new_category',axis=1,inplace=True)
+    else:
         X = df.drop(['cases_new','date','state'], axis=1)  #predict newcases
         y = df['cases_new']
         regressor(X,y)

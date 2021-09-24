@@ -44,7 +44,7 @@ def app():
     st.write("Two different methods, Boruta and Recursive Feature Elimination (RFE) algorithms are implemented during feature selection process. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
             + "Different states might get different rank of the useful features.")
     
-    selected_metrics = st.selectbox(label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+    selected_metrics = st.selectbox(label = "Choose a State :", options=['Johor','Kedah','Pahang','Selangor','All 4 states'] )
     
     if selected_metrics == "Pahang":
         df = rslt_df_ph

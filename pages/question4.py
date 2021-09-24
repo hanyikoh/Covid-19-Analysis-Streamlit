@@ -15,7 +15,7 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve
 
-df_final = pd.read_csv("data.csv")
+df_final = pd.read_csv("./dataset/cleaned_data.csv")
 df_final = df_final[['Unnamed: 0', 'Unnamed: 1','hosp_covid_hospital','rtk-ag','cases_recovered','pcr','Checkins number','cases_new']]
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]
@@ -31,7 +31,7 @@ def confusion_report(y_test, y_pred):
 
     confusion_majority=confusion_matrix(y_test, y_pred)
 
-    print('Mjority classifier Confusion Matrix\n', confusion_majority)
+    print('Majority classifier Confusion Matrix\n', confusion_majority)
 
     print('**********************')
     print('Majority TN= ', confusion_majority[0][0])
@@ -120,8 +120,6 @@ def getBinsRange(df):
 
 
 def app():
-    #st.write("To be added")
-    #confusion_report(['High','medium'],['High','medium'])
     st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
     state_choice = st.selectbox( label = "Choose a State :", options=['Johor','Kedah','Pahang','Selangor','All 4 states'] )
     model_choice = st.selectbox( label = "Choose regressor or classifier :", options=['Regressor','Classifier'] )

@@ -21,7 +21,7 @@ from tqdm import tqdm_notebook, tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
-df_final = pd.read_csv("data.csv")
+df_final = pd.read_csv("./dataset/cleaned_data.csv")
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]
 rslt_df_kd = df_final[df_final['state'] == "Kedah"]
@@ -37,8 +37,7 @@ def ranking(ranks, names, order=1):
     return dict(zip(names, ranks))
 
 def app():
-    
-    st.markdown("### " +"The strong features to predict daily new Covid-19 cases")
+    st.markdown("> What are the strong features/indicators to daily cases for Pahang, Kedah, Johor, and Selangor?")
     st.write("We have used two different methods, which are Boruta and Recursive Feature Elimination (RFE) to select the most useful feature. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
             + "By applying in different state, we might get different rank of the features.")
     

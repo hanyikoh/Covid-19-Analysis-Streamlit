@@ -50,7 +50,7 @@ st.sidebar.markdown('__Datasets Used__')
 st.sidebar.markdown('Categories: Cases and Testing, Healthcare, Mobility and Contact Tracing')
 
 st.sidebar.markdown('__Open data on COVID-19 in Malaysia__')
-st.sidebar.markdown('[Ministry of Health (MOH)  Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
+st.sidebar.markdown('[Ministry of Health (MOH) Malaysia](https://github.com/MoH-Malaysia/covid19-public)')
 
 st.sidebar.markdown("""<style>.css-1aumxhk {padding: 10em;}</style>""", unsafe_allow_html=True)
 st.sidebar.markdown('''<small>TDS 3301 Data Mining | Group Assignment </small>''', unsafe_allow_html=True)

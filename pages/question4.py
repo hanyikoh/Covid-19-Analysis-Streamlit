@@ -131,15 +131,15 @@ def app():
         df = df_final
     
     if model_choice == "Classifier":
-        df2 = df
-        df2['cases_new_category'] = (pd.cut(df2['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
-        X = df2.drop(['cases_new','date','state','cases_new_category'], axis=1)
-        y = df2.cases_new_category 
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
+        y = df.cases_new_category 
         classify(X,y)
-    else :
+        df.drop('cases_new_category',axis=1,inplace=True)
+    else:   
         X = df.drop(['cases_new','date','state'], axis=1)  #predict newcases
         y = df['cases_new']
-        regressor(X,y)    
+        regressor(X,y)
         
 
 

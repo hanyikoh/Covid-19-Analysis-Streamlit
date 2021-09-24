@@ -413,7 +413,19 @@ def app():
         col1, col2 = st.columns(2)
         null_df=pd.DataFrame({'Column':hospital_df.isna().sum().index, 'Count of Null Values':hospital_df.isna().sum().values})  
         col1.table(null_df.head())
-        msno.bar(hospital_df)
+        
+        missing_values = hospital_df.isnull().sum() / len(hospital_df)
+        missing_values = missing_values[missing_values > 0]
+        missing_values.sort_values(inplace=True)
+        missing_values = missing_values.to_frame()
+        missing_values.columns = ['Count of Missing Values']
+        missing_values.index.names = ['Name']
+        missing_values['Column Name'] = hospital_df.columns
+
+        sns.set(style="whitegrid", color_codes=True)
+        sns.barplot(x = 'Column Name', y = 'Count of Missing Values', data=missing_values)
+        plt.xticks(rotation = 90)
+        plt.show()
         col2.pyplot()
 
         st.write('Outliers detection with Boxplot')

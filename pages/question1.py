@@ -15,11 +15,12 @@ checkIn_dir = "mysejahtera/checkin_state.csv"
 hospital_dir = "epidemic/hospital.csv"
 
 def app():
+    st.markdown('> Discuss the exploratory data analysis steps you have conducted including detection of outliers and missing values?')
     st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
     chosen = st.radio(
     'Choose a Dataset',
-    ["Malaysia Cases", "State Cases", "Clusters", "Malaysia Tests","State Tests","PKRC","State CheckIn","Hospital"])
-    st.write(f"You chosen {chosen} dataset!")
+    ["Malaysia Cases", "State Cases", "Clusters", "Malaysia Tests","State Tests","PKRC","Hospital","State CheckIn"])
+    st.markdown(f"__{chosen} Dataset:__")
     start_date = "2021-07-01"
     end_date = "2021-08-31"
 
@@ -29,6 +30,8 @@ def app():
         before_end_date = state_case_df["date"] <= end_date
         between_two_dates = after_start_date & before_end_date
         state_case_df = state_case_df.loc[between_two_dates]
+
+        st.text('Daily recorded COVID-19 cases at state level.')
         st.write('First 5 rows of the dataset')
         st.table(state_case_df.head())
         
@@ -63,6 +66,8 @@ def app():
         between_two_dates = after_start_date & before_end_date
         clusters_df = clusters_df.loc[between_two_dates]
         clusters_df['date'] = clusters_df.date_announced
+
+        st.text('Exhaustive list of announced clusters with relevant epidemiological datapoint.')
         st.write('First 5 rows of the dataset')
         st.table(clusters_df.head())
 
@@ -98,6 +103,7 @@ def app():
         between_two_dates = after_start_date & before_end_date
         states_tests_df = states_tests_df.loc[between_two_dates]
         
+        st.text('Daily tests (note: not necessarily unique individuals) by type at state level.')
         st.write('First 5 rows of the dataset')
         st.table(states_tests_df.head())
 
@@ -130,6 +136,8 @@ def app():
         before_end_date = malaysia_case_df["date"] <= end_date
         between_two_dates = after_start_date & before_end_date
         malaysia_case_df = malaysia_case_df.loc[between_two_dates]
+
+        st.text('Daily recorded COVID-19 cases at country level.')
         st.write('First 5 rows of the dataset')
         st.table(malaysia_case_df.head())
 
@@ -177,6 +185,8 @@ def app():
         before_end_date = malaysia_tests_df["date"] <= end_date
         between_two_dates = after_start_date & before_end_date
         malaysia_tests_df = malaysia_tests_df.loc[between_two_dates]
+
+        st.text('Daily tests (note: not necessarily unique individuals) by type at country level.')
         st.write('First 5 rows of the dataset')
         st.table(malaysia_tests_df.head())
 
@@ -209,6 +219,8 @@ def app():
         before_end_date = pkrc_df["date"] <= end_date
         between_two_dates = after_start_date & before_end_date
         pkrc_df = pkrc_df.loc[between_two_dates]
+
+        st.text('Flow of patients to/out of Covid-19 Quarantine and Treatment Centres (PKRC), with capacity and utilisation.')
         st.write('First 5 rows of the dataset')
         st.table(pkrc_df.head())
 
@@ -258,6 +270,8 @@ def app():
         between_two_dates = after_start_date & before_end_date
         checkIn_df = checkIn_df.loc[between_two_dates]
         checkIn_df.head()
+
+        st.text('Daily checkins on MySejahtera at state level.')
         st.write('First 5 rows of the dataset')
         st.table(checkIn_df.head())
 
@@ -293,7 +307,7 @@ def app():
         between_two_dates = after_start_date & before_end_date
         hospital_df = hospital_df.loc[between_two_dates]
         hospital_df.head()
-
+        st.text('Flow of patients to/out of hospitals, with capacity and utilisation.')
         st.write('First 5 rows of the dataset')
         st.table(hospital_df.head())
 

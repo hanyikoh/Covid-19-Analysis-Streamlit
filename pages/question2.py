@@ -8,6 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 state_case_dir = "epidemic/cases_state.csv"
 
 def app():
+    st.markdown('> What are the states that exhibit strong correlation with Pahang and Johor?')
     selected_correlation = st.selectbox(
     label="Evaluate Correlation On", options=['New Cases','New Imported Cases','New Recovered Cases']
     )
@@ -31,8 +32,8 @@ def app():
     state_case_new_df.columns = state_case_new_df.columns.str[1:]
     state_case_recovered_df.columns = state_case_recovered_df.columns.str[1:]
     if selected_correlation == "New Cases":
-        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Pahang: Kedah (0.94)')     
-        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Johor: Perak and Pulau Pinang (0.93)')     
+        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Pahang: Kedah, correlation coefficient = 0.94')     
+        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Johor: Perak and Pulau Pinang, correlation coefficient = 0.93')     
         
         corr = state_case_new_df.corr()
         fig, ax = plt.subplots(figsize=(20,10))  
@@ -50,12 +51,12 @@ def app():
             rotation=45,
             horizontalalignment='right'
         )
-        ax.set_title('New Case Correlation Heatmap')
+        ax.set_title('New Cases Correlation Heatmap')
         st.pyplot()
 
-    elif selected_correlation == "New Recovered Cases":
-        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Pahang: Kedah (0.93)')     
-        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Johor: Perak (0.83)')     
+    elif selected_correlation == "New Imported Cases":
+        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Pahang: Perak, correlation coefficient = 0.26')     
+        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Johor: Pulau Pinang, correlation coefficient = 0.17')     
         
         corr = state_case_import_df.corr()
         fig, ax = plt.subplots(figsize=(20,10))  
@@ -73,12 +74,12 @@ def app():
             rotation=45,
             horizontalalignment='right'
         )
-        ax.set_title('Case Import Correlation Heatmap')
+        ax.set_title('Imported Cases Correlation Heatmap')
         st.pyplot()
 
-    elif selected_correlation == "New Imported Cases":
-        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Pahang: Perak (0.26)')     
-        st.write('The state that exhibit strongest correlation in terms of New Covid Cases with Johor: Pulau Pinang (0.17)')     
+    elif selected_correlation == "New Recovered Cases":
+        st.write('The state that exhibit strongest correlation in terms of New Recovered Cases with Pahang: Kedah, correlation coefficient = 0.93')     
+        st.write('The state that exhibit strongest correlation in terms of New Recovered Cases with Johor: Perak, correlation coefficient = 0.83')     
         
         corr = state_case_recovered_df.corr()
         fig, ax = plt.subplots(figsize=(20,10))  
@@ -95,6 +96,6 @@ def app():
             ax.get_xticklabels(),
             rotation=45,
             horizontalalignment='right'
-        );
-        ax.set_title('Recovered Case Correlation Heatmap')
+        )
+        ax.set_title('Recovered Cases Correlation Heatmap')
         st.pyplot()

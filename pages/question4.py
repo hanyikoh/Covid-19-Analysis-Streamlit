@@ -121,23 +121,27 @@ def app():
     
     if state_choice == "Pahang":
         df = rslt_df_ph
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Kedah":
         df = rslt_df_kd
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Johor" :  
         df = rslt_df_jh
-        print(df)
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Selangor" :
         df = rslt_df_sl
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "All 4 states" :
         df = df_final
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
     
     if model_choice == "Classifier":
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
         X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)
         y = df.cases_new_category 
         classify(X,y)
         df.drop('cases_new_category',axis=1,inplace=True)
-    else:   
+    else:
+        df.drop('cases_new_category',axis=1,inplace=True)
         X = df.drop(['cases_new','date','state'], axis=1)  #predict newcases
         y = df['cases_new']
         regressor(X,y)

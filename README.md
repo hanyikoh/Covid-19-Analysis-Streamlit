@@ -17,12 +17,12 @@ Datasets were obtained from Ministry of Health (MOH) Malaysia's github repositor
 ## Screenshots
 
 <p align="center">
-  <img width="300" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/tree/main/screenshots/1.png?raw=true">
+  <img width="1024" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/blob/main/screenshots/1.PNG?raw=true">
 </p>
 
 <p align="center">
-  <img width="300" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/tree/main/screenshots/2.png?raw=true">
+  <img width="1024" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/blob/main/screenshots/2.PNG?raw=true">
 </p>
 
 ### Attribution
-Mooncake icon used is made by mangsaabguru from www.flaticon.com
+_Mooncake icon used is made by mangsaabguru from www.flaticon.com_

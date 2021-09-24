@@ -125,6 +125,7 @@ def app():
         df = rslt_df_kd
     elif state_choice == "Johor" :  
         df = rslt_df_jh
+        print(df)
     elif state_choice == "Selangor" :
         df = rslt_df_sl
     elif state_choice == "All 4 states" :

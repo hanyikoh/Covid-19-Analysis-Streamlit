@@ -1,7 +1,7 @@
 # COVID-19 in Malaysia
 TDS3301 - Data Mining Group Assignment Trimester 1 2021/2022 👨‍💻👩‍💻
 
-A Jupyter Notebook and a Streamlit web app written in Python to analyze on COVID-19 in Malaysia.
+A Jupyter Notebook and a Streamlit web app hosted on Heroku that written in Python to analyze on COVID-19 in Malaysia.
 
 ## Datasets
 Datasets were obtained from Ministry of Health (MOH) Malaysia's github repository, [Open data on COVID-19 in Malaysia](https://github.com/MoH-Malaysia/covid19-public). The data used were updated until 21/09/2021.
@@ -13,3 +13,16 @@ Datasets were obtained from Ministry of Health (MOH) Malaysia's github repositor
 * pkrc.csv: Flow of patients to/out of Covid-19 Quarantine and Treatment Centres (PKRC), with capacity and utilisation as of 2359 of date.
 * hospital.csv: Flow of patients to/out of hospitals, with capacity and utilisation as of 2359 of date.
 * icu.csv: Capacity and utilisation of intensive care unit (ICU) beds as of 2359 of date.
+
+## Screenshots
+
+<p align="center">
+  <img width="300" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/tree/main/screenshots/1.png?raw=true">
+</p>
+
+<p align="center">
+  <img width="300" src="https://github.com/hanyikoh/Covid-19-Analysis-Streamlit/tree/main/screenshots/2.png?raw=true">
+</p>
+
+### Attribution
+Mooncake icon used is made by mangsaabguru from www.flaticon.com

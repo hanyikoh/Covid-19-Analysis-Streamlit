@@ -5,7 +5,6 @@ seaborn==0.11.1
 matplotlib==3.4.2
 pandas_profiling==3.0.0
 streamlit_pandas_profiling==0.1.2
-
 sklearn==0.24.2
 scipy==1.7.1
 boruta==0.3

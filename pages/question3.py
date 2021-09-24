@@ -21,8 +21,6 @@ from tqdm import tqdm_notebook, tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
-start_date = "2021-07-01"
-end_date = "2021-08-31"
 df_final = pd.read_csv("data.csv")
 df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
 rslt_df_ph = df_final[df_final['state'] == "Pahang"]
@@ -39,12 +37,12 @@ def ranking(ranks, names, order=1):
     return dict(zip(names, ranks))
 
 def app():
-    st.markdown('> What are the strong features/indicators to daily cases for Pahang, Kedah, Johor, and Selangor?')
-    #st.markdown("### " +"The strong features to predict daily new Covid-19 cases")
-    st.write("Two different methods, Boruta and Recursive Feature Elimination (RFE) algorithms are implemented during feature selection process. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
-            + "Different states might get different rank of the useful features.")
     
-    selected_metrics = st.selectbox(label = "Choose a State :", options=['Johor','Kedah','Pahang','Selangor','All 4 states'] )
+    st.markdown("### " +"The strong features to predict daily new Covid-19 cases")
+    st.write("We have used two different methods, which are Boruta and Recursive Feature Elimination (RFE) to select the most useful feature. Feature selection can reduce overfitting, increase the model's accuracy and reduce training time. " 
+            + "By applying in different state, we might get different rank of the features.")
+    
+    selected_metrics = st.selectbox(label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
     
     if selected_metrics == "Pahang":
         df = rslt_df_ph

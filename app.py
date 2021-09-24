@@ -12,6 +12,7 @@ from pages import question1,question2,question3,question4
 # Create an instance of the app 
 app = MultiPage()
 st.set_page_config(layout='wide',page_title='Mooncake\'s Assignment', page_icon='🌕')
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # Import Cases and Testing Dataset
 malaysia_case_dir = "dataset/cases_malaysia.csv"

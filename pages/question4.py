@@ -107,8 +107,16 @@ def regressor(X,y):
     showMSE(y_test,y_pred)
     st.write("> #### Linear Regressor has similar accuracy with Lasso Regressor")
     
-    
-        
+def getBinsRange(df):  
+        data = df['cases_new'].values
+        # First quartile (Q1)
+        Q1 = np.percentile(data, 25, interpolation = 'midpoint')
+        # Third quartile (Q3)
+        Q3 = np.percentile(data, 75, interpolation = 'midpoint')
+
+        return [np.min(data),Q1,Q3,np.inf]
+
+
 def app():
     #st.write("To be added")
     #confusion_report(['High','medium'],['High','medium'])
@@ -121,19 +129,19 @@ def app():
     
     if state_choice == "Pahang":
         df = rslt_df_ph
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Kedah":
         df = rslt_df_kd
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Johor" :  
         df = rslt_df_jh
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "Selangor" :
         df = rslt_df_sl
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     elif state_choice == "All 4 states" :
         df = df_final
-        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=[0,95, 491, 926],labels=['Low', 'Medium', 'High'], include_lowest=True))
+        df['cases_new_category'] = (pd.cut(df['cases_new'], bins=getBinsRange(df),labels=['Low', 'Medium', 'High'], include_lowest=True))
     
     if model_choice == "Classifier":
         X = df.drop(['cases_new','date','state','cases_new_category'], axis=1)

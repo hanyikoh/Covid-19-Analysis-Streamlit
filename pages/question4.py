@@ -54,8 +54,7 @@ def confusion_report(y_test, y_pred):
     evaluation_scores.append(recall)
     evaluation_scores.append(f1)
     evaluation_scores.append(accuracy)
-
-    st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
+    return pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method')
 
 def showMSE(y_test,y_pred):
     from sklearn.metrics import r2_score,median_absolute_error,mean_squared_error,mean_absolute_error
@@ -73,38 +72,41 @@ def showMSE(y_test,y_pred):
     evaluation_scores.append(mean_squared_error(y_test, y_pred))
     evaluation_scores.append(np.sqrt(mean_squared_error(y_test,y_pred)))
     evaluation_scores.append(r2_score(y_test,y_pred))
-    st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Error':evaluation_scores}).set_index('Evaluation Method'))
+    return pd.DataFrame({'Evaluation Method':evaluation_methods, 'Error':evaluation_scores}).set_index('Evaluation Method')
 
 def classify(X,y):
-        st.markdown("> ## Decision Tree Classifier")
+        c1,c2 = st.columns(2)
+        c1.markdown("> ## Decision Tree Classifier")
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
         clf = DecisionTreeClassifier(criterion="gini", max_depth=4, splitter='random') #pruning the tree by setting the depth
         clf = clf.fit(X_train,y_train)# Train Decision Tree Classifer*
         y_pred = clf.predict(X_test)#Predict the response for test dataset*
         #print(clf)
-        confusion_report(y_test,y_pred)
-        st.markdown("> ## Gaussian Naive Bayes Classifier")
+        df = confusion_report(y_test,y_pred)
+        c1.table(df)
+        c2.markdown("> ## Gaussian Naive Bayes Classifier")
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
         model = GaussianNB()
         model = model.fit(X_train,y_train)
         y_pred = model.predict(X_test)
         #print(model)
-        confusion_report(y_test,y_pred)
+        c2.table(confusion_report(y_test,y_pred))
 
 def regressor(X,y):
-    st.markdown("> ## Random Forest Regressor")
+    c1,c2 = st.columns(2)
+    c1.markdown("> ## Random Forest Regressor")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
     rfr = RandomForestRegressor()
     rfr.fit(X, y)
     y_pred = rfr.predict(X_test)
-    showMSE(y_test,y_pred)
+    c1.table(showMSE(y_test,y_pred))
     
-    st.markdown("> ## Linear Regressor")
+    c2.markdown("> ## Linear Regressor")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 2)
     model = LinearRegression()
     model.fit(X_train,y_train)
     y_pred = model.predict(X_test)
-    showMSE(y_test,y_pred)
+    c2.table(showMSE(y_test,y_pred))
     st.write("> #### Linear Regressor has similar accuracy with Lasso Regressor")
     
 def getBinsRange(df):  

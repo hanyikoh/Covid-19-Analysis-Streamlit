@@ -3,7 +3,6 @@ import pandas as pd
 import streamlit as st
 import seaborn as sns
 import matplotlib.pyplot as plt
-import missingno as msno
 
 malaysia_case_dir = "dataset/cases_malaysia.csv"
 state_case_dir = "dataset/cases_state.csv"

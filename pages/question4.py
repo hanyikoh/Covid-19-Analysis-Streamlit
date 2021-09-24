@@ -15,6 +15,13 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import precision_recall_curve
 
+df_final = pd.read_csv("data.csv")
+df_final.rename(columns = {'Unnamed: 0': 'date', 'Unnamed: 1': 'state'}, inplace=True)
+rslt_df_ph = df_final[df_final['state'] == "Pahang"]
+rslt_df_kd = df_final[df_final['state'] == "Kedah"]
+rslt_df_jh = df_final[df_final['state'] == "Johor"]
+rslt_df_sl = df_final[df_final['state'] == "Selangor"]
+
 def confusion_report(y_test, y_pred):
     # Confusion matrix report
 
@@ -49,6 +56,35 @@ def confusion_report(y_test, y_pred):
 
     st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
 
+def showMSE(y_test,y_pred):
+    from sklearn.metrics import r2_score,median_absolute_error,mean_squared_error,mean_absolute_error
+    evaluation_methods = []
+    evaluation_scores = []
+    
+    evaluation_methods.append('Median absolute error')
+    evaluation_methods.append('Mean absolute error')
+    
+    evaluation_scores.append(median_absolute_error(y_test, y_pred))
+    evaluation_scores.append(mean_absolute_error(y_test, y_pred))
+    st.table(pd.DataFrame({'Evaluation Method':evaluation_methods, 'Score':evaluation_scores}).set_index('Evaluation Method'))
+
+def read_choice(state_choice):
+    if state_choice == "Pahang":
+        df = rslt_df_ph
+    elif state_choice == "Kedah":
+        df = rslt_df_kd
+    elif state_choice == "Johor" :  
+        df = rslt_df_jh
+    elif state_choice == "Selangor" :
+        df = rslt_df_sl
+    elif state_choice == "All 4 states" :
+        df = df_final
+    
+        
 def app():
-    st.write("To be added")
-    confusion_report(['High','medium'],['High','medium'])
+    #st.write("To be added")
+    #confusion_report(['High','medium'],['High','medium'])
+    st.markdown('> Comparing regression and classification models, what model performs well in predicting the daily cases for Pahang, Kedah, Johor, and Selangor?')
+    state_choice = st.selectbox( label = "Choose a State :", options=['Pahang','Johor','Kedah','Selangor','All 4 states'] )
+    model_choice = st.selectbox( label = "Choose regressor or classifier :", options=['Regressor','Classifier'] )
+    read_choice(state_choice)

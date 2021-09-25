@@ -10,7 +10,7 @@ state_case_dir = "dataset/cases_state.csv"
 def app():
     st.markdown('> What are the states that exhibit strong correlation with Pahang and Johor?')
     selected_correlation = st.selectbox(
-    label="Evaluate Correlation On", options=['New Cases','New Imported Cases','New Recovered Cases']
+    label="Evaluate Correlation On", options=['New Cases','Imported Cases','Recovered Cases']
     )
     state_case_df = pd.read_csv(state_case_dir)
     date = state_case_df.date
@@ -51,12 +51,12 @@ def app():
             rotation=45,
             horizontalalignment='right'
         )
-        ax.set_title('New Cases Correlation Heatmap')
+        ax.set_title('Cases Correlation Heatmap')
         st.pyplot()
 
-    elif selected_correlation == "New Imported Cases":
-        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Pahang: Perak, correlation coefficient = 0.26')     
-        st.write('The state that exhibit strongest correlation in terms of New Imported Covid Cases with Johor: Pulau Pinang, correlation coefficient = 0.17')     
+    elif selected_correlation == "Imported Cases":
+        st.write('The state that exhibit strongest correlation in terms of Imported Covid Cases with Pahang: Perak, correlation coefficient = 0.26')     
+        st.write('The state that exhibit strongest correlation in terms of Imported Covid Cases with Johor: Pulau Pinang, correlation coefficient = 0.17')     
         
         corr = state_case_import_df.corr()
         fig, ax = plt.subplots(figsize=(20,10))  
@@ -77,9 +77,9 @@ def app():
         ax.set_title('Imported Cases Correlation Heatmap')
         st.pyplot()
 
-    elif selected_correlation == "New Recovered Cases":
-        st.write('The state that exhibit strongest correlation in terms of New Recovered Cases with Pahang: Kedah, correlation coefficient = 0.93')     
-        st.write('The state that exhibit strongest correlation in terms of New Recovered Cases with Johor: Perak, correlation coefficient = 0.83')     
+    elif selected_correlation == "Recovered Cases":
+        st.write('The state that exhibit strongest correlation in terms of Recovered Cases with Pahang: Kedah, correlation coefficient = 0.93')     
+        st.write('The state that exhibit strongest correlation in terms of Recovered Cases with Johor: Perak, correlation coefficient = 0.83')     
         
         corr = state_case_recovered_df.corr()
         fig, ax = plt.subplots(figsize=(20,10))  

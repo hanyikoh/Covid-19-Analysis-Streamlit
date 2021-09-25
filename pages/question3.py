@@ -103,4 +103,4 @@ def app():
     st.markdown('- Recursive Feature Elimination (RFE) ')
     st.markdown('Recursive Feature Elimination (RFE) works by searching for a subset of features in the training dataset, starting with all of them and successfully removing them until the desired number remains. This is accomplished by re-fitting the model using the given machine learning algorithm, ranking features by importance, discarding the least important features, and fitting the model again. This procedure is repeated until only a certain number of features are left.')
     
-    st.write('As result, the features differ for different states and merged dataset. In the result, rtk-ag has been in top 5 features suggested by both Boruta and RFE methods, the reason might be because more people testing will result in more cases being reported.')
+    st.write('As a result, the features differ for different states and merged dataset. In the result, rtk-ag has been in top 5 features suggested by both Boruta and RFE methods, the reason might be because more people testing will result in more cases being reported.')

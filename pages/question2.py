@@ -99,3 +99,16 @@ def app():
         )
         ax.set_title('Recovered Cases Correlation Heatmap')
         st.pyplot()
+
+    st.markdown('We have chosen the state cases dataset to find the underlying strong correlations that exist with Pahang and Johor. In our case, we have checked the correlation between the states with Pahang and Johor for new cases, imported cases, and recovered cases.')  
+    
+    st.markdown('#### New Cases')
+    st.markdown('1. The state that exhibit strongest correlation in terms of New Covid Cases with __Pahang__: Kedah, correlation coefficient = 0.94.  Other states are exhibiting strong correlations with Pahang as well with more than 0.6 correlation coefficient value except Labuan with only 0.13 correlation coefficient value with Pahang.')  
+    st.markdown('2. The state that exhibit strongest correlation in terms of New Covid Cases with __Johor__: Perak and Pulau Pinang, correlation coefficient = 0.93.  Other states are exhibiting strong correlations with Pahang as well with more than 0.6 correlation coefficient value  except Negeri Sembilan and Labuan with only 0.5 and 0.094 correlation coefficient values with Pahang respectively.')   
+    st.markdown('#### Imported Cases')  
+    st.markdown('1. The state that exhibit strongest correlation in terms of Imported Covid Cases with __Pahang__: Perak, correlation coefficient = 0.26.')  
+    st.markdown('2. The state that exhibit strongest correlation in terms of Imported Covid Cases with __Johor__: Pulau Pinang, correlation coefficient = 0.17.') 
+    st.write('Based on the result, it can be concluded that all states are not having strong correlation with each other. The reason might be that only particular states are more preferred by the foreigners for business or travel purposes.')   
+    st.markdown('#### Recovered Cases')  
+    st.markdown('1. The state that exhibit strongest correlation in terms of Recovered Cases with __Pahang__: Kedah, correlation coefficient = 0.93.  Other states are exhibiting strong correlations with Pahang as well with more than 0.6 correlation coefficient value  except Labuan with only 0.18 correlation coefficient value with Pahang.')  
+    st.markdown('2. The state that exhibit strongest correlation in terms of Recovered Cases with ___Johor__: Perak, correlation coefficient = 0.83.  Other states are exhibiting strong correlations with Pahang as well with more than 0.6 correlation coefficient value  except Negeri Sembilan and Labuan with only 0.56 and 0.13 correlation coefficient values with Pahang respectively.')

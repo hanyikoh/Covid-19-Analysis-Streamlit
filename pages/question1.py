@@ -457,3 +457,5 @@ def app():
 
         st.set_option('deprecation.showPyplotGlobalUse', False)
         st.pyplot()
+
+    st.markdown('In this part, we tried to explore the data and generate initial insights. After reading in the datasets and filtering out the months needed, we have used functions such as _head(), info(), describe(), shape()_ to learn the basic information of each dataset and used _isna()_ and isnull() to find any existence of missing data. There are no null values found, hence in this part we did not do any action of filling nulls. Thus, boxplots for every column in the datasets were used to visualize the data distribution in terms of the shape, spreadness, min, mode, median, and outliers. The processes above were repeated for all eight datasets.')

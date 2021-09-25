@@ -96,3 +96,5 @@ def app():
         st.table(top15)
     elif chosen == "RFE Feature Selection":
         st.table(top15)
+
+    st.write('Based on above, the features differ for different states and merged dataset. In the result, rtk-ag has been in top 5 features suggested by both Boruta and RFE methods, the reason might be because more people testing will result in more cases being reported.')

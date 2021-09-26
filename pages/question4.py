@@ -49,7 +49,6 @@ def confusion_report(y_test, y_pred):
     evaluation_methods.append('Recall')
     evaluation_methods.append('F1')
     evaluation_methods.append('Accuracy')
-
     evaluation_scores.append(precision)
     evaluation_scores.append(recall)
     evaluation_scores.append(f1)

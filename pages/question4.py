@@ -131,11 +131,11 @@ def app():
         df = rslt_df_ph
     elif state_choice == "Kedah":
         df = rslt_df_kd
-    elif state_choice == "Johor" :  
+    elif state_choice == "Johor":  
         df = rslt_df_jh
-    elif state_choice == "Selangor" :
+    elif state_choice == "Selangor":
         df = rslt_df_sl
-    elif state_choice == "All 4 states" :
+    elif state_choice == "All 4 states":
         df = df_final
         
     print(df)
